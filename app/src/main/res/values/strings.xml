@@ -2,5 +2,17 @@
     <string name="app_name">Estok</string>
 
 
+    <string name="enter_email">Enter your Email</string>
+    <string name="enter_password">Enter your Password</string>
+    <string name="login">LOGIN</string>
+    <string name="register">Register</string>
+    <string name="signup">SIGN UP</string>
     <string name="logo">LOGO</string>
+    <string name="forgot_password"><u>Forgotten Password?</u></string>
+    <string name="no_account"><u>Don\'t have an Account?</u></string>
+    <string name="have_account"><u>Already have an Account?</u></string>
+    <string name="name"><u>Name</u></string>
+    <string name="signup_email"><u>Email</u></string>
+    <string name="signup_password"><u>Password</u></string>
+    <string name="confirm_password"><u>Confirm Password</u></string>
 </resources>

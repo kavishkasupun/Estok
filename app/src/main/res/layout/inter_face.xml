@@ -7,8 +7,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="@drawable/airline_int"
+        android:alpha="0.6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,9 +31,9 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="315dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="-15dp"
+        android:layout_width="290dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="3dp"
         android:layout_gravity="center"
         android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,6 +42,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00"
-        app:srcCompat="@drawable/airline_int" />
+        app:srcCompat="@drawable/airfoce_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

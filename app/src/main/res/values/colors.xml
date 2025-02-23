@@ -5,4 +5,18 @@
     <color name="skyblue">#0089d7</color>
     <color name="whitx">#f6fcfe</color>
 
+
+    <color name="lavendra">#0D1E4C</color>
+    <color name="link">#8692F7</color>
+    <color name="gray">#d2d2d2</color>
+
+    <color name="red">#FF0000</color>
+    <color name="light_bg">#b8babf</color>
+    <color name="border_color">#BABABA</color>
+
+    <color name="icon">#6A6A6A</color>
+    <color name="onyx">#454545</color>
+    <color name="box">#9C9C9C</color>
+    <color name="text">#202020</color>
+
 </resources>
