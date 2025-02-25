@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/additem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddItem">
+
+    <include
+        android:id="@+id/layout_interface"
+        layout="@layout/inter_face"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_items"
+        android:layout_width="144dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="85dp"
+        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="@color/skyblue"
+        android:text="@string/add"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+
+    <EditText
+        android:id="@+id/item_name"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_margin="0dp"
+        android:layout_marginTop="180dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Item Name"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/skyblue"
+        android:textColorHint="#494949"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+    <EditText
+        android:id="@+id/item_count"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_margin="0dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Item Count"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/skyblue"
+        android:textColorHint="#494949"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.520"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a Plant"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="-358dp"
+        app:layout_constraintStart_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_count"
+        android:textColor="@color/skyblue"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/spinner_unit"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_border"
+        android:paddingStart="15dp"
+        android:spinnerMode="dropdown"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_count" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:text="Add Item"
+        android:textColor="@color/skyblue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

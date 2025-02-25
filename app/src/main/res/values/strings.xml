@@ -15,4 +15,8 @@
     <string name="signup_email"><u>Email</u></string>
     <string name="signup_password"><u>Password</u></string>
     <string name="confirm_password"><u>Confirm Password</u></string>
+
+
+    <string name="add">ADD</string>
+
 </resources>

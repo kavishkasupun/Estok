@@ -126,17 +126,21 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:background="@drawable/bottom_background"
-        android:elevation="2dp"
-        app:itemIconSize="30dp"
+        android:elevation="12dp"
+        app:itemIconSize="22dp"
+        app:itemPaddingBottom="-0dp"
+        app:itemPaddingTop="0dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/buttom_menu"
+        app:itemTextAppearanceActive="@style/TextAppearance.MaterialComponents.Caption"
+        app:itemTextAppearanceInactive="@style/TextAppearance.MaterialComponents.Caption"
         tools:ignore="MissingConstraints,VisualLintBottomNav" />
 
 </RelativeLayout>
