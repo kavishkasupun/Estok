@@ -81,6 +81,8 @@
         app:layout_constraintTop_toBottomOf="@id/spinner_option"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_manageItem"
         android:layout_width="144dp"
@@ -96,5 +98,7 @@
 
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
