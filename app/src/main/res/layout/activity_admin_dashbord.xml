@@ -231,7 +231,7 @@
         app:cardElevation="12dp">
 
       <LinearLayout
-          android:id="@+id/view_submitMachine"
+          android:id="@+id/view_order"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:background="@color/white"
@@ -245,7 +245,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:src="@drawable/view"
+            android:src="@drawable/market"
             app:tint="@color/skyblue"
             tools:ignore="ContentDescription" />
 
@@ -294,7 +294,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:src="@drawable/logout"
+            android:src="@drawable/view"
             app:tint="@color/skyblue"
             tools:ignore="ContentDescription" />
 

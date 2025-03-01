@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Items">
+
+    <include
+        android:id="@+id/layout_interface"
+        layout="@layout/inter_face"/>
+
+    <EditText
+        android:id="@+id/quantity"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="@color/skyblue"
+        android:hint="Enter Quantity"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint=""
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:foregroundTint="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a Item"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/spinner_item"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:textSize="18sp"
+        android:paddingStart="15dp"
+        android:background="@drawable/rounded_border"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_order"
+        android:layout_width="144dp"
+        android:layout_height="52dp"
+        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="@color/skyblue"
+        android:text="@string/add"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.920"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+
+
+
+    <EditText
+        android:id="@+id/addNumber"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Enter a Number"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:foregroundTint="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.530"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+    <EditText
+        android:id="@+id/addName"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Enter a Name"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:foregroundTint="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.640"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+    <EditText
+        android:id="@+id/addJobid"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Enter a Job Id"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:foregroundTint="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.740"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:text="Add Module"
+        android:textColor="@color/skyblue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
