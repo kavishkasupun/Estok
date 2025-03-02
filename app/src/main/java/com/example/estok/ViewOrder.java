@@ -1,10 +1,22 @@
 package com.example.estok;
 
+import android.Manifest;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -17,8 +29,29 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 public class ViewOrder extends AppCompatActivity {
 
@@ -27,6 +60,11 @@ public class ViewOrder extends AppCompatActivity {
     private List<OrderItem> orderItemList;
     private FirebaseFirestore db;
     private CustomPrograssDialog progressDialog;
+    private static final int STORAGE_PERMISSION_CODE = 100;
+    private File excelFile;
+    private static final String FILE_NAME = "Orders.xlsx";
+    private Button btnExportExcel;
+    private Uri fileUri = null;
 
 
     @Override
@@ -49,6 +87,20 @@ public class ViewOrder extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        // Request permission to write to storage
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    STORAGE_PERMISSION_CODE);
+        }
+
+        // Define Excel file location
+        excelFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), FILE_NAME);
+
+        // Initialize Export Button
+        btnExportExcel = findViewById(R.id.btn_export_excel);
+        btnExportExcel.setOnClickListener(v -> exportToExcel());
+
         loadOrders();
     }
 
@@ -60,7 +112,6 @@ public class ViewOrder extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         orderItemList.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Manually map Firestore fields to OrderItem
                             String itemName = document.getString("itemName");
                             String option = document.getString("Option");
                             int quantity = document.getLong("quantity").intValue();
@@ -69,11 +120,10 @@ public class ViewOrder extends AppCompatActivity {
                             String addJobid = document.getString("addJobid");
                             Timestamp time = document.getTimestamp("time");
                             String addName = document.getString("addName");
-                            String orderId = document.getId(); // Get the unique document ID
+                            String orderId = document.getId();
 
-                            // Create an OrderItem object
                             OrderItem orderItem = new OrderItem(itemName, option, quantity, unit, addNumber, addJobid, time, addName);
-                            orderItem.setOrderId(orderId); // Set the unique document ID
+                            orderItem.setOrderId(orderId);
                             orderItemList.add(orderItem);
                         }
                         progressDialog.dismiss();
@@ -82,6 +132,147 @@ public class ViewOrder extends AppCompatActivity {
                         Toast.makeText(ViewOrder.this, "Failed to load orders.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void exportToExcel() {
+        db.collection("OrderItem").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                List<OrderItem> orderList = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String itemName = document.getString("itemName");
+                    String option = document.getString("Option");
+                    int quantity = document.getLong("quantity").intValue();
+                    String unit = document.getString("unit");
+                    String addNumber = document.getString("addNumber");
+                    String addJobid = document.getString("addJobid");
+                    Timestamp time = document.getTimestamp("time");
+                    String addName = document.getString("addName");
+
+                    orderList.add(new OrderItem(itemName, option, quantity, unit, addNumber, addJobid, time, addName));
+                }
+                updateExcelFile(orderList);
+            } else {
+                Toast.makeText(ViewOrder.this, "Failed to load orders.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updateExcelFile(List<OrderItem> orderList) {
+        Workbook workbook;
+        Sheet sheet;
+        boolean isNewFile = false;
+
+        // Handle file storage based on Android version
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            fileUri = getFileUri();
+        } else {
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), FILE_NAME);
+            fileUri = Uri.fromFile(file);
+        }
+
+        try (InputStream fis = (fileUri != null) ? getContentResolver().openInputStream(fileUri) : null) {
+            if (fis != null) {
+                workbook = new XSSFWorkbook(fis);
+                sheet = workbook.getSheet("Orders");
+            } else {
+                isNewFile = true;
+                workbook = new XSSFWorkbook();
+                sheet = workbook.createSheet("Orders");
+            }
+        } catch (IOException e) {
+            isNewFile = true;
+            workbook = new XSSFWorkbook();
+            sheet = workbook.createSheet("Orders");
+        }
+
+        // Read existing timestamps to prevent duplicates
+        Set<String> existingTimestamps = new HashSet<>();
+        if (!isNewFile && sheet != null) {
+            for (Row row : sheet) {
+                if (row.getRowNum() == 0) continue; // Skip header
+                Cell timeCell = row.getCell(6);
+                if (timeCell != null) {
+                    existingTimestamps.add(timeCell.getStringCellValue().trim());
+                }
+            }
+        }
+
+        // Create header row if it's a new file
+        if (isNewFile) {
+            Row headerRow = sheet.createRow(0);
+            String[] columns = {"Item Name", "Option", "Quantity", "Unit", "User Number", "Job ID", "Time", "Submitted By"};
+            for (int i = 0; i < columns.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(columns[i]);
+                CellStyle style = workbook.createCellStyle();
+                style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+                style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                cell.setCellStyle(style);
+            }
+        }
+
+        // Append new data if not already in the sheet
+        int lastRowNum = sheet.getLastRowNum();
+        for (OrderItem order : orderList) {
+            String orderTime = order.getTime().toDate().toString().trim();
+            if (!existingTimestamps.contains(orderTime)) {
+                Row row = sheet.createRow(++lastRowNum);
+                row.createCell(0).setCellValue(order.getItemName());
+                row.createCell(1).setCellValue(order.getOptionName());
+                row.createCell(2).setCellValue(order.getQuantity());
+                row.createCell(3).setCellValue(order.getUnit());
+                row.createCell(4).setCellValue(order.getUserNumber());
+                row.createCell(5).setCellValue(order.getJobId());
+                row.createCell(6).setCellValue(orderTime);
+                row.createCell(7).setCellValue(order.getSubmitBy());
+            }
+        }
+
+        // Save the updated file
+        try (OutputStream fos = (fileUri != null) ? getContentResolver().openOutputStream(fileUri, "wt") : null) {
+            if (fos != null) {
+                workbook.write(fos);
+                workbook.close();
+                Toast.makeText(this, "Excel updated successfully!", Toast.LENGTH_LONG).show();
+            }
+        } catch (IOException e) {
+            Toast.makeText(this, "Failed to update Excel file.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private Uri getFileUri() {
+        Uri collection = MediaStore.Files.getContentUri("external");
+        String selection = MediaStore.MediaColumns.DISPLAY_NAME + "=?";
+        String[] selectionArgs = new String[]{FILE_NAME};
+
+        try (Cursor cursor = getContentResolver().query(collection, null, selection, selectionArgs, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                int idColumn = cursor.getColumnIndex(MediaStore.MediaColumns._ID);
+                if (idColumn != -1) {
+                    long fileId = cursor.getLong(idColumn);
+                    return Uri.withAppendedPath(collection, String.valueOf(fileId));
+                }
+            }
+        }
+
+        // If file does not exist, create a new one
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, FILE_NAME);
+        values.put(MediaStore.MediaColumns.MIME_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
+
+        return getContentResolver().insert(collection, values);
+    }
+
+    // Handle permission result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(this, "Storage permission denied!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void onAcceptButtonClick(OrderItem orderItem, int position) {
