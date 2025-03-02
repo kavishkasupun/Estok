@@ -280,7 +280,7 @@
         app:cardElevation="12dp">
 
       <LinearLayout
-          android:id="@+id/download"
+          android:id="@+id/acceptOrder"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:background="@color/white"
@@ -304,7 +304,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            android:text="View Solution"
+            android:text="View Accept Order"
             android:textColor="@color/skyblue"
             android:textSize="18sp"
             android:textStyle="bold"

@@ -15,7 +15,7 @@ import com.example.estok.Helper.SessionManager;
 public class AdminDashbord extends AppCompatActivity {
 
 
-    LinearLayout logout, addUnit, addItems, addOptions, mangeOption, viewOrder;
+    LinearLayout logout, addUnit, addItems, addOptions, mangeOption, viewOrder, acceptOrder;
     private SessionManager sessionManager;
 
 
@@ -41,6 +41,13 @@ public class AdminDashbord extends AppCompatActivity {
         addOptions = findViewById(R.id.add_option);
         mangeOption = findViewById(R.id.mangeItems);
         viewOrder = findViewById(R.id.view_order);
+        acceptOrder = findViewById(R.id.acceptOrder);
+
+        // Set click listener for acceptOrder
+        acceptOrder.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminDashbord.this, AcceptOrder.class);
+            startActivity(intent);
+        });
 
         // Set click listener for viewOrder
         viewOrder.setOnClickListener(v -> {

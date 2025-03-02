@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+
+    <View
+        android:id="@+id/item_container"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:background="@drawable/box_with_round_corner"
+        android:backgroundTint="@color/light_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Item Name"
+        android:textColor="@color/skyblue"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/item_container"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintTop_toTopOf="@+id/item_container"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/option_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Option Name"
+        android:textColor="@color/skyblue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Quntity"
+        android:textColor="@color/skyblue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/option_name"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/Unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:text="Unit"
+        android:textColor="@color/skyblue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/option_name"
+        app:layout_constraintStart_toStartOf="@+id/quantity"
+        app:layout_constraintEnd_toEndOf="@+id/item_container"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/Order_Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Order Id:- 202231045646"
+        android:textColor="@color/skyblue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/quantity"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container" />
+
+    <TextView
+        android:id="@+id/User_Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Number"
+        android:textColor="@color/skyblue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/Order_Id"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container" />
+
+    <TextView
+        android:id="@+id/Job_Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Job Id"
+        android:textColor="@color/skyblue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/User_Number"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/submite_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container"
+        android:text="12 January 2025 at 14:24:31"
+        android:textColor="@color/skyblue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/Job_Id"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/Submite_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/item_container"
+        app:layout_constraintEnd_toEndOf="@+id/item_container"
+        android:text="User Name"
+        android:textColor="@color/skyblue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/submite_date"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
