@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -15,7 +16,7 @@ import com.example.estok.Helper.SessionManager;
 public class AdminDashbord extends AppCompatActivity {
 
 
-    LinearLayout logout, addUnit, addItems, addOptions, mangeOption, viewOrder, acceptOrder;
+    CardView logout, addUnit, addItems, addOptions, mangeOption, viewOrder, acceptOrder,ItemCheck;
     private SessionManager sessionManager;
 
 
@@ -42,7 +43,13 @@ public class AdminDashbord extends AppCompatActivity {
         mangeOption = findViewById(R.id.mangeItems);
         viewOrder = findViewById(R.id.view_order);
         acceptOrder = findViewById(R.id.acceptOrder);
+        ItemCheck = findViewById(R.id.ItemCheck);
 
+        // Set click listener for ItemCheck
+        ItemCheck.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminDashbord.this, StockCheck.class);
+            startActivity(intent);
+        });
         // Set click listener for acceptOrder
         acceptOrder.setOnClickListener(v -> {
             Intent intent = new Intent(AdminDashbord.this, AcceptOrder.class);

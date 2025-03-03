@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/StockAdd"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StockAdd">
+
+    <include
+        android:id="@+id/layout_interface"
+        layout="@layout/inter_face"/>
+
+    <TextView
+        android:id="@+id/ItemName"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Enter a Number"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:foregroundTint="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.30"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+
+    <EditText
+        android:id="@+id/quantity"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="@color/skyblue"
+        android:hint="Enter Quantity"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        android:layout_margin="12dp"
+        android:autofillHints="name"
+        android:background="@drawable/rounded_border"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint=""
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:foregroundTint="@color/skyblue"
+        android:textColorHint="@color/skyblue"
+        android:textSize="16sp"
+        android:textColor="@color/skyblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42"
+        tools:ignore="HardcodedText,LabelFor,MissingConstraints,RtlSymmetry,TextFields" />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_stock"
+        android:layout_width="144dp"
+        android:layout_height="52dp"
+        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="@color/skyblue"
+        android:text="@string/add"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.920"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete_stock"
+        android:layout_width="144dp"
+        android:layout_height="52dp"
+        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="@color/red"
+        android:text="Delete"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.920"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
