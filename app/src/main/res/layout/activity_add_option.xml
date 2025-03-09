@@ -20,7 +20,7 @@
         android:background="@drawable/rounded_border"
         android:drawablePadding="5dp"
         android:ems="10"
-        android:hint="Enter Opton"
+        android:hint="Enter Option"
         android:inputType="text"
         android:minHeight="48dp"
         android:paddingStart="10dp"
