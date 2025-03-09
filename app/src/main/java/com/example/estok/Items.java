@@ -33,6 +33,7 @@ public class Items extends AppCompatActivity {
     private FirebaseFirestore db;
     private String selectedOption;
     private List<String> itemList = new ArrayList<>();
+    private CustomPrograssDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class Items extends AppCompatActivity {
         addNumberEditText = findViewById(R.id.addNumber);
         addJobidEditText = findViewById(R.id.addJobid);
         addOrderButton = findViewById(R.id.add_order);
+        dialog = new CustomPrograssDialog(Items.this);
         db = FirebaseFirestore.getInstance();
 
         // Get the selected option (document name) from the intent
@@ -68,6 +70,7 @@ public class Items extends AppCompatActivity {
     }
 
     private void loadItems() {
+        dialog.show();
         db.collection("Estock").document(selectedOption).collection("ManagedItems")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -85,10 +88,12 @@ public class Items extends AppCompatActivity {
                         loadUnitForItem(itemList.get(0)); // Load unit for the first item
                     }
                 })
+                .addOnCompleteListener(task -> dialog.dismiss())
                 .addOnFailureListener(e -> Toast.makeText(Items.this, "Failed to load items", Toast.LENGTH_SHORT).show());
     }
 
     private void loadUnitForItem(String itemName) {
+        dialog.show();
         db.collection("Items")
                 .whereEqualTo("name", itemName)
                 .get()
@@ -101,6 +106,7 @@ public class Items extends AppCompatActivity {
                         }
                     }
                 })
+                .addOnCompleteListener(task -> dialog.dismiss())
                 .addOnFailureListener(e -> Toast.makeText(Items.this, "Failed to load unit", Toast.LENGTH_SHORT).show());
     }
 
@@ -122,8 +128,9 @@ public class Items extends AppCompatActivity {
         db.collection("Items").whereEqualTo("name", selectedItem).get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        String availableStockString = document.getString("count");
-                        int availableStock = availableStockString != null ? Integer.parseInt(availableStockString) : 0;
+                        // Fix: Use getLong() instead of getString() for numeric fields
+                        Long availableStockLong = document.getLong("count");
+                        int availableStock = availableStockLong != null ? availableStockLong.intValue() : 0;
 
                         if (quantity > availableStock) {
                             Toast.makeText(Items.this, "Out of stock: " + selectedItem, Toast.LENGTH_SHORT).show();
@@ -148,7 +155,10 @@ public class Items extends AppCompatActivity {
         orderData.put("Option", selectedOption); // Save selected option (document name)
         orderData.put("time", Timestamp.now());
 
+        // Save order data to Firestore
+        dialog.show();
         db.collection("OrderItem").add(orderData)
+                .addOnCompleteListener(task -> dialog.dismiss())
                 .addOnSuccessListener(documentReference -> Toast.makeText(Items.this, "Order saved successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(Items.this, "Failed to save order", Toast.LENGTH_SHORT).show());
     }

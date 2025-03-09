@@ -54,7 +54,7 @@ public class User extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.add_btn) {
                 // Navigate to the Module activity
-                startActivity(new Intent(getApplicationContext(), Add.class));
+                startActivity(new Intent(getApplicationContext(), Option.class));
                 overridePendingTransition(R.anim.slide_right, R.anim.slide_left); // Apply transition animation
                 finish(); // Close the current activity
                 return true;
