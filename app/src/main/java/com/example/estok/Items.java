@@ -128,7 +128,7 @@ public class Items extends AppCompatActivity {
         db.collection("Items").whereEqualTo("name", selectedItem).get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        // Fix: Use getLong() instead of getString() for numeric fields
+                        // Retrieve the count as a Long (or Integer) instead of a String
                         Long availableStockLong = document.getLong("count");
                         int availableStock = availableStockLong != null ? availableStockLong.intValue() : 0;
 
@@ -158,8 +158,14 @@ public class Items extends AppCompatActivity {
         // Save order data to Firestore
         dialog.show();
         db.collection("OrderItem").add(orderData)
-                .addOnCompleteListener(task -> dialog.dismiss())
-                .addOnSuccessListener(documentReference -> Toast.makeText(Items.this, "Order saved successfully", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(Items.this, "Failed to save order", Toast.LENGTH_SHORT).show());
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        dialog.dismiss();
+                        Toast.makeText(Items.this, "Order saved successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dialog.dismiss();
+                        Toast.makeText(Items.this, "Failed to save order", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

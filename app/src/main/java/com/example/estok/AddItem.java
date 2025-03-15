@@ -84,11 +84,20 @@ public class AddItem extends AppCompatActivity {
             return;
         }
 
+        // Convert the count to a numeric type (Long or Integer)
+        long count;
+        try {
+            count = Long.parseLong(itemCount);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid count value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         progressDialog.show();
 
         Map<String, Object> itemData = new HashMap<>();
         itemData.put("name", itemName);
-        itemData.put("count", itemCount);
+        itemData.put("count", count); // Save as a numeric type
         itemData.put("unit", selectedUnit);
 
         db.collection("Items")
