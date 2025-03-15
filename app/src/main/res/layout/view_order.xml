@@ -15,7 +15,7 @@
         android:layout_width="350dp"
         android:layout_height="300dp"
         android:background="@drawable/box_with_round_corner"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/light_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintHorizontal_bias="0.491"
