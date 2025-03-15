@@ -56,14 +56,6 @@ public class Home extends AppCompatActivity {
                 return true;
             }
 
-            else if (itemId == R.id.view_btn) {
-                // Navigate to the Module activity
-                startActivity(new Intent(getApplicationContext(), View.class));
-                overridePendingTransition(R.anim.slide_right, R.anim.slide_left); // Apply transition animation
-                finish(); // Close the current activity
-                return true;
-            }
-
             else if (itemId == R.id.user_btn) {
                 // Navigate to the Module activity
                 startActivity(new Intent(getApplicationContext(), User.class));

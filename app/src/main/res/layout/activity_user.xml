@@ -15,12 +15,12 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/profileImg"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="190dp"
         app:srcCompat="@drawable/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/lavendra"/>
+        app:tint="@color/skyblue"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:id="@+id/username"
         android:layout_marginTop="12dp"
         android:text=""
-        android:textColor="@color/black"
+        android:textColor="@color/skyblue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/profileImg"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/email"
         android:text=""
-        android:textColor="@color/black"
+        android:textColor="@color/skyblue"
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@id/username"
@@ -56,7 +56,7 @@
         android:gravity="center"
         android:text="Sign Out"
         android:textColor="@color/white"
-        android:backgroundTint="@color/lavendra"
+        android:backgroundTint="@color/skyblue"
         android:textSize="18sp"
         app:cornerRadius = "20dp"
         app:layout_constraintEnd_toEndOf="parent"

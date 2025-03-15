@@ -50,16 +50,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         // Disable buttons if the order has been processed
         holder.btnAccept.setEnabled(!orderItem.isProcessed());
-        holder.btnReject.setEnabled(!orderItem.isProcessed());
+
 
         // Handle button clicks
         holder.btnAccept.setOnClickListener(v -> {
             viewOrderActivity.onAcceptButtonClick(orderItem, position);
         });
 
-        holder.btnReject.setOnClickListener(v -> {
-            viewOrderActivity.onRejectButtonClick(position);
-        });
+
     }
 
     @Override
@@ -69,7 +67,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView itemName, optionName, quantity, unit, userNumber, jobId, submitDate, submitBy;
-        Button btnAccept, btnReject;
+        Button btnAccept;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,7 +84,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
             // Map buttons to their IDs
             btnAccept = itemView.findViewById(R.id.btn_accept);
-            btnReject = itemView.findViewById(R.id.btn_reject);
         }
     }
 }

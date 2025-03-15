@@ -17,7 +17,7 @@
         android:id="@+id/btn_export_excel"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="790dp"
+        android:layout_marginTop="740dp"
         android:backgroundTint="@color/skyblue"
         android:text="Export to Excel"
         android:textColor="@color/white"

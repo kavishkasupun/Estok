@@ -244,19 +244,31 @@ public class ViewOrder extends AppCompatActivity {
 
         // Append new data if not already in the sheet
         int lastRowNum = sheet.getLastRowNum();
+        List<OrderItem> newEntries = new ArrayList<>();
         for (OrderItem order : orderList) {
             String orderTime = order.getTime().toDate().toString().trim();
             if (!existingTimestamps.contains(orderTime)) {
-                Row row = sheet.createRow(++lastRowNum);
-                row.createCell(0).setCellValue(order.getItemName());
-                row.createCell(1).setCellValue(order.getOptionName());
-                row.createCell(2).setCellValue(order.getQuantity());
-                row.createCell(3).setCellValue(order.getUnit());
-                row.createCell(4).setCellValue(order.getUserNumber());
-                row.createCell(5).setCellValue(order.getJobId());
-                row.createCell(6).setCellValue(orderTime);
-                row.createCell(7).setCellValue(order.getSubmitBy());
+                newEntries.add(order);
             }
+        }
+
+        // Check if there is new data to export
+        if (newEntries.isEmpty()) {
+            Toast.makeText(this, "No new data to export.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Append new data to the sheet
+        for (OrderItem order : newEntries) {
+            Row row = sheet.createRow(++lastRowNum);
+            row.createCell(0).setCellValue(order.getItemName());
+            row.createCell(1).setCellValue(order.getOptionName());
+            row.createCell(2).setCellValue(order.getQuantity());
+            row.createCell(3).setCellValue(order.getUnit());
+            row.createCell(4).setCellValue(order.getUserNumber());
+            row.createCell(5).setCellValue(order.getJobId());
+            row.createCell(6).setCellValue(order.getTime().toDate().toString());
+            row.createCell(7).setCellValue(order.getSubmitBy());
         }
 
         // Save the updated file
@@ -424,18 +436,5 @@ public class ViewOrder extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(ViewOrder.this, "Failed to save order to AcceptOrder.", Toast.LENGTH_SHORT).show();
                 });
-    }
-
-    public void onRejectButtonClick(int position) {
-        OrderItem orderItem = orderItemList.get(position);
-        if (orderItem.isProcessed()) {
-            Toast.makeText(this, "This order has already been processed.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Mark the order as processed
-        orderItem.setProcessed(true);
-        adapter.notifyItemChanged(position); // Notify adapter to update the view
-        Toast.makeText(ViewOrder.this, "Order rejected.", Toast.LENGTH_SHORT).show();
     }
 }
