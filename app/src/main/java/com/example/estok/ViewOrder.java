@@ -126,12 +126,43 @@ public class ViewOrder extends AppCompatActivity {
                             orderItem.setOrderId(orderId);
                             orderItemList.add(orderItem);
                         }
+
+                        // Sort the list to prioritize today's date
+                        sortOrdersByDate();
+
                         progressDialog.dismiss();
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(ViewOrder.this, "Failed to load orders.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void sortOrdersByDate() {
+        // Get today's date
+        long today = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        String todayDate = sdf.format(today);
+
+        // Sort the list
+        orderItemList.sort((item1, item2) -> {
+            if (item1.getTime() == null || item2.getTime() == null) {
+                return 0; // If either timestamp is null, don't change the order
+            }
+
+            // Compare dates
+            String date1 = sdf.format(item1.getTime().toDate());
+            String date2 = sdf.format(item2.getTime().toDate());
+
+            if (date1.equals(todayDate) && !date2.equals(todayDate)) {
+                return -1; // Today's date comes first
+            } else if (!date1.equals(todayDate) && date2.equals(todayDate)) {
+                return 1; // Today's date comes first
+            } else {
+                // If both are today's date or not today's date, sort by time in descending order
+                return Long.compare(item2.getTime().getSeconds(), item1.getTime().getSeconds());
+            }
+        });
     }
 
     private void exportToExcel() {

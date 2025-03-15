@@ -40,9 +40,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class AcceptOrder extends AppCompatActivity {
@@ -114,12 +116,43 @@ public class AcceptOrder extends AppCompatActivity {
                             AcceptOrderItem item = new AcceptOrderItem(itemName, optionName, quantity, unit, orderId, userNumber, jobId, formattedTime, submitBy);
                             acceptOrderList.add(item);
                         }
+
+                        // Sort the list to prioritize today's date
+                        sortAcceptOrdersByDate();
+
                         progressDialog.dismiss();
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(this, "Failed to load orders: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void sortAcceptOrdersByDate() {
+        // Get today's date
+        long today = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        String todayDate = sdf.format(today);
+
+        // Sort the list
+        acceptOrderList.sort((item1, item2) -> {
+            if (item1.getFormattedTime() == null || item2.getFormattedTime() == null) {
+                return 0; // If either timestamp is null, don't change the order
+            }
+
+            // Compare dates
+            String date1 = sdf.format(item1.getFormattedTime().toDate());
+            String date2 = sdf.format(item2.getFormattedTime().toDate());
+
+            if (date1.equals(todayDate) && !date2.equals(todayDate)) {
+                return -1; // Today's date comes first
+            } else if (!date1.equals(todayDate) && date2.equals(todayDate)) {
+                return 1; // Today's date comes first
+            } else {
+                // If both are today's date or not today's date, sort by time in descending order
+                return Long.compare(item2.getFormattedTime().getSeconds(), item1.getFormattedTime().getSeconds());
+            }
+        });
     }
 
     private void generateExcelFile() {
